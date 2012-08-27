@@ -1,15 +1,15 @@
 package main
 
 import (
-	"net/http"
 	"flag"
 	"fmt"
+	"net/http"
 )
 
 var (
 	addrFlag = flag.String("a", ":8080", "Address to bind to")
 	helpFlag = flag.Bool("h", false, "Show this help")
-	fs http.Handler
+	fs       http.Handler
 )
 
 func main() {
@@ -34,5 +34,6 @@ func main() {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Access-Control-Allow-Origin", "*")
+	w.Header().Add("Cache-Control", "no-cache")
 	fs.ServeHTTP(w, r)
 }
